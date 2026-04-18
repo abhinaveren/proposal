@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Question !!!</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #ff6b9d;
+    --pink-light: #ffd6e7;
+    --yellow: #ffd93d;
+    --bg: #fff5f9;
+    --text: #3d1a24;
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--bg);
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hearts-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .floating-heart {
+    position: absolute;
+    font-size: 24px;
+    animation: floatUp linear infinite;
+    opacity: 0.15;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: 0.15; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    background: white;
+    border-radius: 32px;
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(255, 107, 157, 0.18);
+    border: 2px solid var(--pink-light);
+    animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .bear {
+    font-size: 72px;
+    display: block;
+    margin-bottom: 8px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-12px); }
+  }
+
+  h1 {
+    font-family: 'Pacifico', cursive;
+    color: var(--pink);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .name {
+    color: var(--text);
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    color: #999;
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .question {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .question-sub {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-bottom: 32px;
+  }
+
+  .btn-wrap {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-yes {
+    background: var(--pink);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.4);
+  }
+
+  .btn-yes:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 24px rgba(255, 107, 157, 0.5);
+  }
+
+  .btn-yes:active { transform: scale(0.96); }
+
+  .btn-no {
+    background: white;
+    color: #ccc;
+    border: 2px solid #eee;
+    border-radius: 50px;
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    position: absolute;
+    transition: font-size 0.2s;
+  }
+
+  .meme {
+    font-size: 0.8rem;
+    color: #ddd;
+    margin-top: 24px;
+    font-style: italic;
+  }
+
+  .success-screen {
+    display: none;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .success-screen.show { display: block; }
+  .main-screen.hide { display: none; }
+
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  .success-emoji { font-size: 80px; display: block; margin-bottom: 12px; animation: bounce 1s ease-in-out infinite; }
+  .success-title { font-family: 'Pacifico', cursive; color: var(--pink); font-size: 2rem; margin-bottom: 12px; }
+  .success-msg { color: var(--text); font-size: 1rem; line-height: 1.7; }
+  .success-msg b { color: var(--pink); }
+</style>
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsBg"></div>
+
+<div class="card">
+  <div class="main-screen" id="mainScreen">
+    <span class="bear">🐻</span>
+    <h1>Hey there,</h1>
+    <div class="name">YOUR_CRUSH_NAME !</div>
+    <div class="subtitle">I have been practicing SQL for weeks<br>but I still can't <code>SELECT</code> anyone but you 🥺</div>
+
+    <div class="question">Will you be my girlfriend?</div>
+    <div class="question-sub">(choose wisely, the bear is watching)</div>
+
+    <div class="btn-wrap" style="position:relative; height: 60px;">
+      <button class="btn-yes" onclick="sayYes()">Yes!!</button>
+      <button class="btn-no" id="noBtn" onmouseover="runAway()" ontouchstart="runAway()">No</button>
+    </div>
+
+    <div class="meme" id="memeText">hover over "No" and see what happens...</div>
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <span class="success-emoji">🥳</span>
+    <div class="success-title">She said YES!!</div>
+    <div class="success-msg">
+      I knew it all along 😎<br><br>
+      Okay fine I was <b>terrified</b>.<br>
+      But now I get to call you mine<br>
+      and that makes everything worth it. 🤍
+    </div>
+  </div>
+</div>
+
+<script>
+  const messages = [
+    "Nice try...",
+    "Nope, not today!",
+    "The button said NO 😤",
+    "Stop trying lol",
+    "Just click Yes already!",
+    "Running awayyy...",
+    "You can't catch me!",
+    "Okay this is getting embarrassing",
+    "JUST SAY YES 😭"
+  ];
+
+  let noCount = 0;
+
+  function runAway() {
+    const btn = document.getElementById('noBtn');
+    const wrap = document.querySelector('.btn-wrap');
+    const card = document.querySelector('.card');
+    const cardRect = card.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+
+    const maxX = cardRect.width - btnRect.width - 20;
+    const maxY = 40;
+
+    const randX = Math.floor(Math.random() * maxX) - maxX / 2;
+    const randY = Math.floor(Math.random() * maxY * 2) - maxY;
+
+    btn.style.transform = `translate(${randX}px, ${randY}px)`;
+
+    const smaller = Math.max(0.6, 1 - noCount * 0.08);
+    btn.style.fontSize = (smaller * 1.1) + 'rem';
+    btn.style.opacity = smaller;
+
+    if (noCount < messages.length) {
+      document.getElementById('memeText').textContent = messages[noCount];
+    }
+    noCount++;
+  }
+
+  function sayYes() {
+    document.getElementById('mainScreen').classList.add('hide');
+    document.getElementById('successScreen').classList.add('show');
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const colors = ['#ff6b9d','#ffd93d','#6bcfff','#a8ff78','#ff9a9e','#ffecd2'];
+    for (let i = 0; i < 120; i++) {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.classList.add('confetti-piece');
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.background = colors[Math.floor(Math.random() * colors.length)];
+        el.style.width = (Math.random() * 10 + 6) + 'px';
+        el.style.height = (Math.random() * 10 + 6) + 'px';
+        el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        el.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 4000);
+      }, i * 30);
+    }
+  }
+
+  function spawnHearts() {
+    const bg = document.getElementById('heartsBg');
+    for (let i = 0; i < 18; i++) {
+      const h = document.createElement('div');
+      h.classList.add('floating-heart');
+      h.textContent = ['❤️','🧡','💛','💚','💙','💜','🩷'][Math.floor(Math.random() * 7)];
+      h.style.left = Math.random() * 100 + '%';
+      h.style.animationDuration = (Math.random() * 8 + 6) + 's';
+      h.style.animationDelay = (Math.random() * 6) + 's';
+      h.style.fontSize = (Math.random() * 20 + 14) + 'px';
+      bg.appendChild(h);
+    }
+  }
+
+  spawnHearts();
+</script>
+</body>
+</html>
